@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.ManageOrganizationsController"
+            stylesheets="@../css/style.css"
+            prefWidth="1050" prefHeight="700"
+            styleClass="dashboard-root">
+
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="Exit" onAction="#handleExit"/>
+            </Menu>
+            <Menu text="Format">
+                <MenuItem text="Font Size" onAction="#handleFontSize"/>
+                <MenuItem text="Font Family" onAction="#handleFontFamily"/>
+                <MenuItem text="Background Color" onAction="#handleTheme"/>
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="About App" onAction="#handleAboutApp"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <left>
+        <VBox spacing="15" prefWidth="230" styleClass="admin-sidebar">
+            <padding>
+                <Insets top="25" right="15" bottom="25" left="15"/>
+            </padding>
+
+            <Label text="GHADS" styleClass="admin-logo"/>
+            <Label text="Admin Panel" styleClass="admin-logo-subtitle"/>
+            <Separator/>
+
+            <Button text="Dashboard" maxWidth="Infinity" onAction="#goToDashboard" styleClass="side-button"/>
+            <Button text="Organizations" maxWidth="Infinity" styleClass="active-side-button"/>
+            <Button text="Users" maxWidth="Infinity" onAction="#goToUsers" styleClass="side-button"/>
+            <Button text="Families" maxWidth="Infinity" onAction="#goToFamilies" styleClass="side-button"/>
+            <Button text="Aid Distributions" maxWidth="Infinity" onAction="#goToAidDistributions" styleClass="side-button"/>
+            <Button text="Change Password" maxWidth="Infinity" onAction="#goToChangePassword" styleClass="side-button"/>            
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="Logout" maxWidth="Infinity" onAction="#handleLogout" styleClass="logout-button"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="18" styleClass="dashboard-content">
+            <padding>
+                <Insets top="25" right="30" bottom="30" left="30"/>
+            </padding>
+
+            <VBox spacing="4">
+                <Label text="Manage Organizations" styleClass="dashboard-title"/>
+                <Label text="Add, update, delete, and view humanitarian organizations" styleClass="dashboard-subtitle"/>
+            </VBox>
+
+            <GridPane hgap="15" vgap="12" styleClass="panel-box">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="20"/>
+                    <ColumnConstraints percentWidth="30"/>
+                    <ColumnConstraints percentWidth="20"/>
+                    <ColumnConstraints percentWidth="30"/>
+                </columnConstraints>
+
+                <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label"/>
+                <TextField fx:id="nameField" promptText="Organization name" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Type:" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="field-label"/>
+                <TextField fx:id="typeField" promptText="NGO / Local / International" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+                <Label text="Contact Info:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label"/>
+                <TextField fx:id="contactInfoField" promptText="Phone or email" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3"/>
+            </GridPane>
+
+            <HBox spacing="12">
+                <Button text="Add" onAction="#handleAdd" styleClass="login-button"/>
+                <Button text="Update" onAction="#handleUpdate" styleClass="login-button"/>
+                <Button text="Delete" onAction="#handleDelete" styleClass="logout-button"/>
+                <Button text="Show / Refresh" onAction="#loadOrganizations" styleClass="login-button"/>
+                <Button text="Reset" onAction="#handleReset"  styleClass="reset-blue-button"/>
+            </HBox>
+
+            <TableView fx:id="organizationsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" prefWidth="80"/>
+                    <TableColumn fx:id="nameColumn" text="Name" prefWidth="220"/>
+                    <TableColumn fx:id="typeColumn" text="Type" prefWidth="180"/>
+                    <TableColumn fx:id="contactColumn" text="Contact Info" prefWidth="300"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

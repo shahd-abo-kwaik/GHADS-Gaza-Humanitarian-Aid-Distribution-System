@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.ManageUsersController"
+            stylesheets="@../css/style.css"
+            prefWidth="1200" prefHeight="780"
+            styleClass="dashboard-root">
+
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="Exit" onAction="#handleExit"/>
+            </Menu>
+            <Menu text="Format">
+                <MenuItem text="Font Size" onAction="#handleFontSize"/>
+                <MenuItem text="Font Family" onAction="#handleFontFamily"/>
+                <MenuItem text="Background Color" onAction="#handleTheme"/>
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="About App" onAction="#handleAboutApp"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <left>
+        <VBox spacing="15" prefWidth="250" styleClass="admin-sidebar">
+            <padding>
+                <Insets top="25" right="15" bottom="25" left="15"/>
+            </padding>
+
+            <Label text="GHADS" styleClass="admin-logo"/>
+            <Label text="Admin Panel" styleClass="admin-logo-subtitle"/>
+            <Separator/>
+<Button text="Dashboard" maxWidth="Infinity" onAction="#goToDashboard" styleClass="side-button"/>
+<Button text="Organizations" maxWidth="Infinity" onAction="#goToOrganizations" styleClass="side-button"/>
+<Button text="Users" maxWidth="Infinity" styleClass="active-side-button"/>
+<Button text="Families" maxWidth="Infinity" onAction="#goToFamilies" styleClass="side-button"/>
+<Button text="Aid Distributions" maxWidth="Infinity" onAction="#goToAidDistributions" styleClass="side-button"/>
+<Button text="Change Password" maxWidth="Infinity" onAction="#goToChangePassword" styleClass="side-button"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="Logout" maxWidth="Infinity" onAction="#handleLogout" styleClass="logout-button"/>
+        </VBox>
+    </left>
+
+    <center>
+       <ScrollPane fitToWidth="true" styleClass="dashboard-root">
+        <content>
+            <VBox spacing="18" styleClass="dashboard-content">
+            <padding>
+                <Insets top="25" right="30" bottom="30" left="30"/>
+            </padding>
+
+            <VBox spacing="4">
+                <Label text="Manage Users" styleClass="dashboard-title"/>
+                <Label text="Add, update, delete, and manage system users" styleClass="dashboard-subtitle"/>
+            </VBox>
+
+            <HBox spacing="18" VBox.vgrow="ALWAYS">
+
+                <VBox spacing="12" styleClass="panel-box" prefWidth="390">
+                    <Label text="User Information" styleClass="section-title"/>
+
+                    <Label text="Full Name:" styleClass="field-label"/>
+                    <TextField fx:id="fullNameField" promptText="Enter full name"/>
+
+                    <Label text="Username:" styleClass="field-label"/>
+                    <TextField fx:id="usernameField" promptText="Enter username"/>
+
+                    <Label text="Password:" styleClass="field-label"/>
+                    <PasswordField fx:id="passwordField" promptText="Enter password min 8 characters"/>
+
+                    <Label text="Email:" styleClass="field-label"/>
+                    <TextField fx:id="emailField" promptText="Enter email"/>
+
+                    <Label text="Role:" styleClass="field-label"/>
+                    <ComboBox fx:id="roleComboBox" promptText="Select role" maxWidth="Infinity"/>
+
+                    <Label text="Organization:" styleClass="field-label"/>
+                    <ComboBox fx:id="organizationComboBox" promptText="Select organization" maxWidth="Infinity"/>
+
+                    <Label text="Photo:" styleClass="field-label"/>
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <ImageView fx:id="photoImageView" fitWidth="90" fitHeight="90" preserveRatio="true"/>
+                        <Button text="Browse Image" onAction="#handleBrowseImage" styleClass="login-button"/>
+                    </HBox>
+
+                    <Label fx:id="photoPathLabel" text="No image selected" styleClass="muted-text"/>
+                </VBox>
+
+                <VBox spacing="12" styleClass="panel-box" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="Users List" styleClass="section-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Show / Refresh" onAction="#loadUsers" styleClass="login-button"/>
+                    </HBox>
+
+                    <TableView fx:id="usersTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+                            <TableColumn fx:id="fullNameColumn" text="Full Name" prefWidth="150"/>
+                            <TableColumn fx:id="usernameColumn" text="Username" prefWidth="120"/>
+                            <TableColumn fx:id="emailColumn" text="Email" prefWidth="180"/>
+                            <TableColumn fx:id="roleColumn" text="Role" prefWidth="120"/>
+                            <TableColumn fx:id="organizationColumn" text="Organization" prefWidth="170"/>
+                            <TableColumn fx:id="photoColumn" text="Photo Path" prefWidth="180"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="12">
+                <Button text="Add" onAction="#handleAdd" styleClass="login-button"/>
+                <Button text="Update" onAction="#handleUpdate" styleClass="login-button"/>
+                <Button text="Delete" onAction="#handleDelete" styleClass="logout-button"/>
+                <Button text="Reset" onAction="#handleReset" styleClass="reset-blue-button"/>
+            </HBox>
+         </VBox>
+        </content>
+      </ScrollPane>
+    </center>
+
+</BorderPane>

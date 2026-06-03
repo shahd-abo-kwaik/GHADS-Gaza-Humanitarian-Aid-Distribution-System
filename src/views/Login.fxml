@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="rootPane"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.LoginController"
+            stylesheets="@../css/style.css"
+            prefWidth="900" prefHeight="650"
+            styleClass="login-root">
+
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="Exit" onAction="#handleExit"/>
+            </Menu>
+            <Menu text="Format">
+                <MenuItem text="Font Size" onAction="#handleFontSize"/>
+                <MenuItem text="Font Family" onAction="#handleFontFamily"/>
+                <MenuItem text="Background Color" onAction="#handleTheme"/>
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="About App" onAction="#handleAboutApp"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="22">
+            <padding>
+                <Insets top="35" right="40" bottom="40" left="40"/>
+            </padding>
+
+            <VBox alignment="CENTER" spacing="8">
+                <Label text="GHADS" styleClass="app-title"/>
+                <Label text="Gaza Aid Distribution System" styleClass="app-subtitle"/>
+                <Label text="Please login to continue" styleClass="login-note"/>
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="18" styleClass="login-card" maxWidth="430">
+
+                <Label text="Login" styleClass="login-title"/>
+
+                <VBox spacing="7" maxWidth="360">
+                    <Label text="Username" styleClass="field-label"/>
+                    <TextField fx:id="usernameField"
+                               promptText="Enter your username"
+                               styleClass="input-field"/>
+                </VBox>
+
+                <VBox spacing="7" maxWidth="360">
+                    <Label text="Password" styleClass="field-label"/>
+                    <PasswordField fx:id="passwordField"
+                                   promptText="Enter your password"
+                                   styleClass="input-field"/>
+                </VBox>
+
+                <VBox spacing="7" maxWidth="360">
+                    <Label text="Role" styleClass="field-label"/>
+                    <ComboBox fx:id="roleComboBox"
+                              promptText="Select Role"
+                              maxWidth="360"
+                              styleClass="input-field"/>
+                </VBox>
+
+                <Button text="Login"
+                        onAction="#handleLogin"
+                        maxWidth="360"
+                        styleClass="login-button"/>
+
+                <Label text="Secure • Reliable • Transparent" styleClass="footer-text"/>
+            </VBox>
+        </VBox>
+    </center>
+
+</BorderPane>

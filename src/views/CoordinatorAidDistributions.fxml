@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.CoordinatorAidDistributionsController"
+            stylesheets="@../css/style.css"
+            prefWidth="1250" prefHeight="760"
+            styleClass="dashboard-root">
+
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="Exit" onAction="#handleExit"/>
+            </Menu>
+            <Menu text="Format">
+                <MenuItem text="Font Size" onAction="#handleFontSize"/>
+                <MenuItem text="Font Family" onAction="#handleFontFamily"/>
+                <MenuItem text="Background Color" onAction="#handleTheme"/>
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="About App" onAction="#handleAboutApp"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <left>
+        <VBox spacing="15" prefWidth="250" styleClass="admin-sidebar">
+            <padding>
+                <Insets top="25" right="15" bottom="25" left="15"/>
+            </padding>
+
+            <Label text="GHADS" styleClass="admin-logo"/>
+            <Label text="Coordinator Panel" styleClass="admin-logo-subtitle"/>
+            <Separator/>
+
+            <Button text="Dashboard" maxWidth="Infinity" onAction="#goToDashboard" styleClass="side-button"/>
+            <Button text="Families" maxWidth="Infinity" onAction="#goToFamilies" styleClass="side-button"/>
+            <Button text="Aid Distributions" maxWidth="Infinity" styleClass="active-side-button"/>
+            <Button text="Profile" maxWidth="Infinity" onAction="#goToProfile" styleClass="side-button"/>
+            <Button text="Change Password" maxWidth="Infinity" onAction="#goToChangePassword" styleClass="side-button"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Logout" maxWidth="Infinity" onAction="#handleLogout" styleClass="logout-button"/>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="dashboard-root">
+            <content>
+                <VBox spacing="18" styleClass="dashboard-content">
+                    <padding>
+                        <Insets top="25" right="30" bottom="30" left="30"/>
+                    </padding>
+
+                    <VBox spacing="4">
+                        <Label text="Coordinator Aid Distributions" styleClass="dashboard-title"/>
+                        <Label text="Record aid distributions and check duplicate assistance" styleClass="dashboard-subtitle"/>
+                    </VBox>
+
+                    <GridPane hgap="15" vgap="12" styleClass="panel-box">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="15"/>
+                            <ColumnConstraints percentWidth="35"/>
+                            <ColumnConstraints percentWidth="15"/>
+                            <ColumnConstraints percentWidth="35"/>
+                        </columnConstraints>
+
+                        <Label text="Family:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <ComboBox fx:id="familyComboBox" promptText="Select family" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                        <Label text="Organization:" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <ComboBox fx:id="organizationComboBox" promptText="Coordinator organization" maxWidth="Infinity" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+                        <Label text="Coordinator:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <ComboBox fx:id="coordinatorComboBox" promptText="Current coordinator" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                        <Label text="Aid Type:" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <ComboBox fx:id="aidTypeComboBox" promptText="Select aid type" maxWidth="Infinity" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+                        <Label text="Distribution Date:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="field-label"/>
+                        <DatePicker fx:id="distributionDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    </GridPane>
+
+                    <HBox spacing="12">
+                        <Button text="Record Distribution" onAction="#handleAdd" styleClass="login-button"/>
+                        <Button text="Show / Refresh" onAction="#loadDistributions" styleClass="login-button"/>
+                        <Button text="Reset" onAction="#handleReset" styleClass="reset-blue-button"/>
+                    </HBox>
+
+                    <VBox spacing="12" styleClass="panel-box">
+                        <Label text="My Organization Aid Records" styleClass="section-title"/>
+
+                        <TableView fx:id="distributionsTable" prefHeight="430">
+                            <columns>
+                                <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+                                <TableColumn fx:id="familyColumn" text="Family" prefWidth="180"/>
+                                <TableColumn fx:id="organizationColumn" text="Organization" prefWidth="170"/>
+                                <TableColumn fx:id="coordinatorColumn" text="Coordinator" prefWidth="170"/>
+                                <TableColumn fx:id="aidTypeColumn" text="Aid Type" prefWidth="150"/>
+                                <TableColumn fx:id="dateColumn" text="Distribution Date" prefWidth="150"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

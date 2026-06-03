@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.CoordinatorDashboardController"
+            stylesheets="@../css/style.css"
+            prefWidth="1150" prefHeight="720"
+            styleClass="dashboard-root">
+
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="Exit" onAction="#handleExit"/>
+            </Menu>
+            <Menu text="Format">
+                <MenuItem text="Font Size" onAction="#handleFontSize"/>
+                <MenuItem text="Font Family" onAction="#handleFontFamily"/>
+                <MenuItem text="Background Color" onAction="#handleTheme"/>
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="About App" onAction="#handleAboutApp"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <left>
+        <VBox spacing="18" prefWidth="250" styleClass="admin-sidebar">
+            <padding>
+                <Insets top="30" right="18" bottom="25" left="18"/>
+            </padding>
+
+            <Label text="GHADS" styleClass="admin-logo"/>
+            <Label text="Gaza Aid Distribution System" styleClass="admin-logo-subtitle"/>
+
+            <Separator/>
+
+            <Label text="COORDINATOR PANEL" styleClass="side-section-label"/>
+
+            <Button text="Dashboard" maxWidth="Infinity" styleClass="active-side-button"/>
+            <Button text="Families" maxWidth="Infinity" onAction="#goToFamilies" styleClass="side-button"/>
+            <Button text="Aid Distributions" maxWidth="Infinity" onAction="#goToAidDistributions" styleClass="side-button"/>
+            <Button text="Profile" maxWidth="Infinity" onAction="#goToProfile" styleClass="side-button"/>
+            <Button text="Change Password" maxWidth="Infinity" onAction="#goToChangePassword" styleClass="side-button"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <VBox spacing="4" styleClass="admin-user-box">
+                <Label fx:id="coordinatorNameLabel" text="Coordinator" styleClass="admin-user-name"/>
+                <Label fx:id="organizationNameLabel" text="Organization" styleClass="admin-user-role"/>
+            </VBox>
+
+            <Button text="Logout" maxWidth="Infinity" onAction="#handleLogout" styleClass="logout-button"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="22" styleClass="dashboard-content">
+            <padding>
+                <Insets top="28" right="32" bottom="28" left="32"/>
+            </padding>
+
+            <HBox alignment="CENTER_LEFT">
+                <VBox spacing="4">
+                    <Label text="Coordinator Dashboard" styleClass="dashboard-title"/>
+                    <Label text="Organization overview and aid statistics" styleClass="dashboard-subtitle"/>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <VBox alignment="CENTER" spacing="4" styleClass="date-box">
+                    <Label text="GHADS System" styleClass="date-title"/>
+                    <Label text="Coordinator Panel" styleClass="date-subtitle"/>
+                </VBox>
+            </HBox>
+
+            <GridPane hgap="18" vgap="18">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33.33"/>
+                    <ColumnConstraints percentWidth="33.33"/>
+                    <ColumnConstraints percentWidth="33.33"/>
+                </columnConstraints>
+
+                <VBox styleClass="dashboard-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Total Families" styleClass="card-title"/>
+                    <Label fx:id="totalFamiliesLabel" text="0" styleClass="card-number"/>
+                    <Label text="Families registered in system" styleClass="card-desc"/>
+                </VBox>
+
+                <VBox styleClass="dashboard-card green-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="Served By My Organization" styleClass="card-title"/>
+                    <Label fx:id="servedByOrgLabel" text="0" styleClass="card-number"/>
+                    <Label text="Families served by my organization" styleClass="card-desc"/>
+                </VBox>
+
+                <VBox styleClass="dashboard-card orange-card" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <Label text="Families Not Served" styleClass="card-title"/>
+                    <Label fx:id="notServedLabel" text="0" styleClass="card-number"/>
+                    <Label text="Families with no aid records yet" styleClass="card-desc"/>
+                </VBox>
+            </GridPane>
+
+            <HBox spacing="18" VBox.vgrow="ALWAYS">
+                <VBox spacing="12" styleClass="panel-box" HBox.hgrow="ALWAYS">
+                    <Label text="My Organization" styleClass="section-title"/>
+                    <Label fx:id="organizationInfoLabel"
+                           text="Organization details will appear here."
+                           wrapText="true"
+                           styleClass="normal-text"/>
+                </VBox>
+
+                <VBox spacing="12" styleClass="panel-box" HBox.hgrow="ALWAYS">
+                    <Label text="Coordinator Tasks" styleClass="section-title"/>
+                    <Label text="• Register new families." styleClass="normal-text"/>
+                    <Label text="• Record aid distributions." styleClass="normal-text"/>
+                    <Label text="• Check duplicate aid records." styleClass="normal-text"/>
+                    <Label text="• Update profile and password." styleClass="normal-text"/>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="12" alignment="CENTER_LEFT" styleClass="welcome-box">
+                <Label text="Welcome, Coordinator" styleClass="welcome-title"/>
+                <Label text="Use the sidebar to manage families and aid distributions for your organization."
+                       styleClass="welcome-text"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

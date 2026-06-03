@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.CoordinatorFamiliesController"
+            stylesheets="@../css/style.css"
+            prefWidth="1250" prefHeight="760"
+            styleClass="dashboard-root">
+
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="Exit" onAction="#handleExit"/>
+            </Menu>
+            <Menu text="Format">
+                <MenuItem text="Font Size" onAction="#handleFontSize"/>
+                <MenuItem text="Font Family" onAction="#handleFontFamily"/>
+                <MenuItem text="Background Color" onAction="#handleTheme"/>
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="About App" onAction="#handleAboutApp"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <left>
+        <VBox spacing="15" prefWidth="250" styleClass="admin-sidebar">
+            <padding>
+                <Insets top="25" right="15" bottom="25" left="15"/>
+            </padding>
+
+            <Label text="GHADS" styleClass="admin-logo"/>
+            <Label text="Coordinator Panel" styleClass="admin-logo-subtitle"/>
+            <Separator/>
+
+            <Button text="Dashboard" maxWidth="Infinity" onAction="#goToDashboard" styleClass="side-button"/>
+            <Button text="Families" maxWidth="Infinity" styleClass="active-side-button"/>
+            <Button text="Aid Distributions" maxWidth="Infinity" onAction="#goToAidDistributions" styleClass="side-button"/>
+            <Button text="Profile" maxWidth="Infinity" onAction="#goToProfile" styleClass="side-button"/>
+            <Button text="Change Password" maxWidth="Infinity" onAction="#goToChangePassword" styleClass="side-button"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Logout" maxWidth="Infinity" onAction="#handleLogout" styleClass="logout-button"/>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="dashboard-root">
+            <content>
+                <VBox spacing="18" styleClass="dashboard-content">
+                    <padding>
+                        <Insets top="25" right="30" bottom="30" left="30"/>
+                    </padding>
+
+                    <VBox spacing="4">
+                        <Label text="Coordinator Family Management" styleClass="dashboard-title"/>
+                        <Label text="Register new families and view registered family records" styleClass="dashboard-subtitle"/>
+                    </VBox>
+
+                    <GridPane hgap="15" vgap="12" styleClass="panel-box">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="16"/>
+                            <ColumnConstraints percentWidth="22"/>
+                            <ColumnConstraints percentWidth="16"/>
+                            <ColumnConstraints percentWidth="22"/>
+                            <ColumnConstraints percentWidth="12"/>
+                            <ColumnConstraints percentWidth="12"/>
+                        </columnConstraints>
+
+                        <Label text="Household Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <TextField fx:id="householdNameField" promptText="Enter household name" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                        <Label text="Phone:" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <TextField fx:id="phoneField" promptText="Enter phone" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+                        <Label text="Location:" GridPane.columnIndex="4" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <TextField fx:id="locationField" promptText="Location" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+
+                        <Label text="Family Size:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <TextField fx:id="familySizeField" promptText="Size" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                        <Label text="National ID:" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <TextField fx:id="nationalIdField" promptText="National ID" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+                        <Label text="Vulnerability:" GridPane.columnIndex="4" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <ComboBox fx:id="vulnerabilityComboBox" promptText="Select" maxWidth="Infinity" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
+
+                        <Label text="Registration Date:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="field-label"/>
+                        <DatePicker fx:id="registrationDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    </GridPane>
+
+                   <HBox spacing="12">
+                  <Button text="Add Family" onAction="#handleAdd" styleClass="login-button"/>
+                  <Button text="Show / Refresh" onAction="#loadFamilies" styleClass="login-button"/>
+                  <Button text="Most Vulnerable" onAction="#handleShowMostVulnerable" styleClass="login-button"/>
+                  <Button text="Not Served Families" onAction="#handleShowNotServedFamilies" styleClass="login-button"/>
+                  <Button text="Reset" onAction="#handleReset" styleClass="reset-blue-button"/>
+                    </HBox>
+                    <VBox spacing="12" styleClass="panel-box">
+                        <Label text="Families List" styleClass="section-title"/>
+
+                        <TableView fx:id="familiesTable" prefHeight="420">
+                            <columns>
+                                <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+                                <TableColumn fx:id="householdNameColumn" text="Household Name" prefWidth="160"/>
+                                <TableColumn fx:id="phoneColumn" text="Phone" prefWidth="110"/>
+                                <TableColumn fx:id="locationColumn" text="Location" prefWidth="140"/>
+                                <TableColumn fx:id="familySizeColumn" text="Family Size" prefWidth="100"/>
+                                <TableColumn fx:id="nationalIdColumn" text="National ID" prefWidth="130"/>
+                                <TableColumn fx:id="vulnerabilityColumn" text="Vulnerability" prefWidth="130"/>
+                                <TableColumn fx:id="registrationDateColumn" text="Registration Date" prefWidth="140"/>
+                                <TableColumn fx:id="lastAidDateColumn" text="Last Aid Date" prefWidth="130"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.CoordinatorProfileController"
+            stylesheets="@../css/style.css"
+            prefWidth="900" prefHeight="650"
+            styleClass="dashboard-root">
+
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="Exit" onAction="#handleExit"/>
+            </Menu>
+            <Menu text="Format">
+                <MenuItem text="Font Size" onAction="#handleFontSize"/>
+                <MenuItem text="Font Family" onAction="#handleFontFamily"/>
+                <MenuItem text="Background Color" onAction="#handleTheme"/>
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="About App" onAction="#handleAboutApp"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <left>
+        <VBox spacing="15" prefWidth="250" styleClass="admin-sidebar">
+            <padding>
+                <Insets top="25" right="15" bottom="25" left="15"/>
+            </padding>
+
+            <Label text="GHADS" styleClass="admin-logo"/>
+            <Label text="Coordinator Panel" styleClass="admin-logo-subtitle"/>
+            <Separator/>
+
+            <Button text="Dashboard" maxWidth="Infinity" onAction="#goToDashboard" styleClass="side-button"/>
+            <Button text="Families" maxWidth="Infinity" onAction="#goToFamilies" styleClass="side-button"/>
+            <Button text="Aid Distributions" maxWidth="Infinity" onAction="#goToAidDistributions" styleClass="side-button"/>
+            <Button text="Profile" maxWidth="Infinity" styleClass="active-side-button"/>
+            <Button text="Change Password" maxWidth="Infinity" onAction="#goToChangePassword" styleClass="side-button"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="Logout" maxWidth="Infinity" onAction="#handleLogout" styleClass="logout-button"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="20" styleClass="dashboard-content">
+            <padding>
+                <Insets top="35" right="40" bottom="35" left="40"/>
+            </padding>
+
+            <VBox spacing="4">
+                <Label text="Coordinator Profile" styleClass="dashboard-title"/>
+                <Label text="View and update your account information and photo" styleClass="dashboard-subtitle"/>
+            </VBox>
+
+            <HBox spacing="25" styleClass="panel-box">
+                <VBox spacing="12" alignment="CENTER">
+                    <ImageView fx:id="profileImageView"
+                               fitWidth="130"
+                               fitHeight="130"
+                               preserveRatio="true"/>
+
+                    <Button text="Choose Photo"
+                            onAction="#handleChoosePhoto"
+                            styleClass="login-button"/>
+                </VBox>
+
+                <GridPane hgap="15" vgap="15" HBox.hgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="30"/>
+                        <ColumnConstraints percentWidth="70"/>
+                    </columnConstraints>
+
+                    <Label text="Full Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label"/>
+                    <TextField fx:id="fullNameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                    <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label"/>
+                    <TextField fx:id="usernameField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="field-label"/>
+                    <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                    <Label text="Role:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="field-label"/>
+                    <TextField fx:id="roleField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                    <Label text="Organization:" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="field-label"/>
+                    <TextField fx:id="organizationField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                </GridPane>
+            </HBox>
+
+            <HBox spacing="12">
+                <Button text="Update Profile" onAction="#handleUpdateProfile" styleClass="login-button"/>
+                <Button text="Reset" onAction="#loadProfile" styleClass="reset-blue-button"/>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>
